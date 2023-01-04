@@ -33,6 +33,7 @@ RUN apk add --no-cache --virtual build-deps ca-certificates gcc libc-dev \
     mkdir -p /usr/local/etc/haproxy && \
     ln -s /usr/local/etc/haproxy /etc/haproxy && \
     cp -R /tmp/haproxy/examples/errorfiles /usr/local/etc/haproxy/errors && \
+    chown -R "$HAPROXY_UID:$HAPROXY_GID" /usr/local/etc/haproxy && \
     rm -rf /tmp/haproxy && \
     apk del build-deps && \
     apk add --no-cache openssl zlib lua5.3-libs pcre2 jq socat util-linux && \
