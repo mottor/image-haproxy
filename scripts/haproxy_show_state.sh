@@ -1,7 +1,7 @@
 #!/bin/sh
 # https://cbonte.github.io/haproxy-dconv/1.7/management.html
 
-IS_RAW="${1:-}"
+IS_RAW="$1"
 
 if [ "$IS_RAW" == "raw" ]; then
   RED=""
