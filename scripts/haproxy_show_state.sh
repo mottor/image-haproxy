@@ -98,7 +98,7 @@ if [ "$IS_RAW" == "raw"]; then
   cat $TMP_FILE
 else
   cat $TMP_FILE | column -t -s"|"
-if
+fi
 
 echo " "
 
