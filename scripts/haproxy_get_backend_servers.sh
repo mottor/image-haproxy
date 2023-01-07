@@ -8,12 +8,10 @@ if [ "$WANTED_BACKEND" == "" ]; then
   exit 1
 fi
 
-# Get state from HAproxy
 STATE=$( echo "show servers state" | socat stdio /var/lib/haproxy/admin.sock )
-
 RES=""
 
-echo "$STATE" | while read -r LINE; do
+while read -r LINE; do
     # Remove unwanted lines
     [ "$LINE" == "1" ] && continue
     ( echo "$LINE" | grep -Eq "^# " ) && continue
@@ -23,8 +21,7 @@ echo "$STATE" | while read -r LINE; do
 
     SRV_NAME=$( echo $LINE | cut -d' ' -f 4 )
     SRV_ADDR=$( echo $LINE | cut -d' ' -f 5 )
-
     RES="${RES}${SRV_NAME}@${SRV_ADDR};"
-done
+done < <(echo -e "$STATE")
 
 echo "$RES" | sed -E 's/[;]+$//g'
