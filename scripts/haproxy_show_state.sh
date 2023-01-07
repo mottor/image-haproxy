@@ -94,7 +94,7 @@ echo "$STATE" | while read -r LINE; do
     printf "$BACKEND_NAME|$SRV_NAME|$SRV_ADDR|$SRV_WEIGHT|$SRV_ADMIN_STATE|$SRV_CHECK_RES|$SRV_OP_STATE\n" >> $TMP_FILE
 done
 
-if [ "$IS_RAW" == "raw"]; then
+if [ "$IS_RAW" == "raw" ]; then
   cat $TMP_FILE
 else
   cat $TMP_FILE | column -t -s"|"
