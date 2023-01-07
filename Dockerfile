@@ -29,10 +29,10 @@ RUN apk add --no-cache --virtual build-deps ca-certificates gcc libc-dev \
     make -C /tmp/haproxy TARGET=linux2628 install-bin install-man && \
     ln -s /usr/local/sbin/haproxy /usr/sbin/haproxy && \
     mkdir -p /var/lib/haproxy && \
-    chown "$HAPROXY_UID:$HAPROXY_GID" /var/lib/haproxy && \
     mkdir -p /usr/local/etc/haproxy && \
     ln -s /usr/local/etc/haproxy /etc/haproxy && \
-    cp -R /tmp/haproxy/examples/errorfiles /usr/local/etc/haproxy/errors && \
+    cp -R /tmp/haproxy/examples/errorfiles /var/lib/haproxy/errors && \
+    chown -R "$HAPROXY_UID:$HAPROXY_GID" /var/lib/haproxy && \
     chown -R "$HAPROXY_UID:$HAPROXY_GID" /usr/local/etc/haproxy && \
     rm -rf /tmp/haproxy && \
     apk del build-deps && \

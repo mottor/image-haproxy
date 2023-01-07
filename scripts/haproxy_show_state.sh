@@ -15,6 +15,7 @@ echo '------------|--------|--------|------|-----------|------------|--------' >
 
 # Get state from HAproxy
 STATE=$( echo "show servers state" | socat stdio /var/lib/haproxy/admin.sock )
+IS_RAW="${1:-}"
 
 echo "$STATE" | while read -r LINE; do
     # Remove unwanted lines
@@ -93,7 +94,12 @@ echo "$STATE" | while read -r LINE; do
     printf "$BACKEND_NAME|$SRV_NAME|$SRV_ADDR|$SRV_WEIGHT|$SRV_ADMIN_STATE|$SRV_CHECK_RES|$SRV_OP_STATE\n" >> $TMP_FILE
 done
 
-cat $TMP_FILE | column -t -s"|"
+if [ "$IS_RAW" == "raw"]; then
+  cat $TMP_FILE
+else
+  cat $TMP_FILE | column -t -s"|"
+if
+
 echo " "
 
 rm $TMP_FILE
