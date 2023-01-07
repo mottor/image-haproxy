@@ -1,12 +1,23 @@
 #!/bin/sh
 # https://cbonte.github.io/haproxy-dconv/1.7/management.html
 
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-YELLOW='\033[0;33m'
-BLUE='\033[0;34m'
-CYAN='\033[0;36m'
-NC='\033[0m' # No Color
+IS_RAW="${1:-}"
+
+if [ "$IS_RAW" == "raw" ]; then
+  RED=""
+  GREEN=""
+  YELLOW=""
+  BLUE=""
+  CYAN=""
+  NC=""
+else
+  RED='\033[0;31m'
+  GREEN='\033[0;32m'
+  YELLOW='\033[0;33m'
+  BLUE='\033[0;34m'
+  CYAN='\033[0;36m'
+  NC='\033[0m' # No Color
+fi
 
 TMP_FILE=/tmp/haproxy_state
 
@@ -15,7 +26,6 @@ echo '------------|--------|--------|------|-----------|------------|--------' >
 
 # Get state from HAproxy
 STATE=$( echo "show servers state" | socat stdio /var/lib/haproxy/admin.sock )
-IS_RAW="${1:-}"
 
 echo "$STATE" | while read -r LINE; do
     # Remove unwanted lines
