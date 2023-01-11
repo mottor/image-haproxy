@@ -19,8 +19,8 @@ STATE=$("${CUR_DIR}/haproxy_show_state.sh" raw)
 FOUND=$(echo "$STATE" | grep "^${BACKEND}|${SERVER}|" | wc -l)
 
 if [ "$FOUND" == "1" ]; then
-  echo "$STATE" | grep "^$BACKEND|$SERVER|" | cut -d'|' -f 5
+  echo "$STATE" | grep "^${BACKEND}|${SERVER}|" | cut -d'|' -f 5
 else
-  echo "ERROR: found $FOUND lines, but 1 expected."
+  echo "ERROR: state for ${BACKEND}/${SERVER} - found $FOUND lines, but 1 expected."
   exit 1
 fi
