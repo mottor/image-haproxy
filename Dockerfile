@@ -36,7 +36,7 @@ RUN apk add --no-cache --virtual build-deps ca-certificates gcc libc-dev \
     chown -R "$HAPROXY_UID:$HAPROXY_GID" /usr/local/etc/haproxy && \
     rm -rf /tmp/haproxy && \
     apk del build-deps && \
-    apk add --no-cache openssl zlib lua5.3-libs pcre2 jq socat util-linux && \
+    apk add --no-cache openssl zlib lua5.3-libs pcre2 jq socat util-linux bash && \
     rm -f /var/cache/apk/*
 
 COPY scripts/ /opt/scripts

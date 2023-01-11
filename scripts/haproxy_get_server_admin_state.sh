@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # https://cbonte.github.io/haproxy-dconv/1.7/management.html
 CUR_DIR=$( cd $(dirname $0) && pwd )
 
