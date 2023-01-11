@@ -52,32 +52,32 @@ echo "$STATE" | while read -r LINE; do
         SRV_ADMIN_STATE=""
 
         STATE_FMAINT=$(( $_SRV_ADMIN_STATE & 0x01 ))
-        if [ $STATE_FMAINT -eq $(printf "%d" "0x01") ]; then
+        if [[ $STATE_FMAINT -eq $(printf "%d" "0x01") ]]; then
             SRV_ADMIN_STATE="$SRV_ADMIN_STATE,forced_maintenance(0x01)"
         fi
 
         STATE_IMAINT=$(( $_SRV_ADMIN_STATE & 0x02 ))
-        if [ $STATE_IMAINT -eq $(printf "%d" "0x02") ]; then
+        if [[ $STATE_IMAINT -eq $(printf "%d" "0x02") ]]; then
             SRV_ADMIN_STATE="$SRV_ADMIN_STATE,inherited_maintenance(0x02)"
         fi
 
         STATE_CMAINT=$(( $_SRV_ADMIN_STATE & 0x04 ))
-        if [ $STATE_FDRAIN -eq $(printf "%d" "0x04") ]; then
+        if [[ $STATE_FDRAIN -eq $(printf "%d" "0x04") ]]; then
             SRV_ADMIN_STATE="$SRV_ADMIN_STATE,configuration_maintenance(0x04)"
         fi
 
         STATE_FDRAIN=$(( $_SRV_ADMIN_STATE & 0x08 ))
-        if [ $STATE_FDRAIN -eq $(printf "%d" "0x08") ]; then
+        if [[ $STATE_FDRAIN -eq $(printf "%d" "0x08") ]]; then
             SRV_ADMIN_STATE="$SRV_ADMIN_STATE,forced_DRAIN(0x08)"
         fi
 
         STATE_IDRAIN=$(( $_SRV_ADMIN_STATE & 0x10 ))
-        if [ $STATE_IDRAIN -eq $(printf "%d" "0x10") ]; then
+        if [[ $STATE_IDRAIN -eq $(printf "%d" "0x10") ]]; then
             SRV_ADMIN_STATE="$SRV_ADMIN_STATE,inherited_DRAIN(0x10)"
         fi
 
         STATE_RMAINT=$(( $_SRV_ADMIN_STATE & 0x20 ))
-        if [ $STATE_RMAINT -eq $(printf "%d" "0x20") ]; then
+        if [[ $STATE_RMAINT -eq $(printf "%d" "0x20") ]]; then
             SRV_ADMIN_STATE="$SRV_ADMIN_STATE,ip_resolution_failure(0x20)"
         fi
 
