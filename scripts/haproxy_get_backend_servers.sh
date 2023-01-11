@@ -5,7 +5,7 @@
 #
 # https://cbonte.github.io/haproxy-dconv/1.7/management.html
 
-WANTED_BACKEND="${1:-}"
+WANTED_BACKEND="$1"
 
 if [ "$WANTED_BACKEND" == "" ]; then
   echo "ERROR: Need 1st argument = backend name"

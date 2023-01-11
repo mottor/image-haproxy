@@ -110,6 +110,4 @@ else
   cat $TMP_FILE | column -t -s"|"
 fi
 
-echo " "
-
 rm $TMP_FILE

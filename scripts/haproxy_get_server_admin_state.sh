@@ -16,11 +16,11 @@ if [ "$SERVER" == "" ]; then
 fi
 
 STATE=$("${CUR_DIR}/haproxy_show_state.sh" raw)
-FOUND=$(echo "$STATE" | grep -E "^$BACKEND|$SERVER|" | wc -l)
+FOUND=$(echo "$STATE" | grep "^${BACKEND}|${SERVER}|" | wc -l)
 
 if [ "$FOUND" == "1" ]; then
-  echo "$STATE" | grep -E "^$BACKEND|$SERVER|" | cut -d'|' -f 5
+  echo "$STATE" | grep "^$BACKEND|$SERVER|" | cut -d'|' -f 5
 else
-  echo "ERROR: server not found OR found more than one."
+  echo "ERROR: found $FOUND lines, but 1 expected."
   exit 1
 fi
