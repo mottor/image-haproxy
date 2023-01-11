@@ -1,9 +1,9 @@
 #!/bin/sh
 # https://cbonte.github.io/haproxy-dconv/1.7/management.html
-CUR_DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+CUR_DIR=$( cd $(dirname $0) && pwd )
 
-BACKEND="${1}"
-SERVER="${2}"
+BACKEND="$1"
+SERVER="$2"
 
 if [ "$BACKEND" == "" ]; then
   echo "ERROR: Need 1st argument = backend name"
@@ -15,7 +15,7 @@ if [ "$SERVER" == "" ]; then
   exit 1
 fi
 
-STATE=$($CUR_DIR/haproxy_show_state.sh raw)
+STATE=$("${CUR_DIR}/haproxy_show_state.sh" raw)
 FOUND=$(echo "$STATE" | grep -E "^$BACKEND|$SERVER|" | wc -l)
 
 if [ "$FOUND" == "1" ]; then
