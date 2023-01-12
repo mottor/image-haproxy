@@ -1,6 +1,5 @@
 #!/bin/bash
 # https://cbonte.github.io/haproxy-dconv/1.7/management.html
-CUR_DIR=$( cd $(dirname $0) && pwd )
 
 BACKEND="$1"
 SERVER="$2"
@@ -15,7 +14,7 @@ if [ "$SERVER" == "" ]; then
   exit 1
 fi
 
-STATE=$("${CUR_DIR}/haproxy_show_state.sh" raw)
+STATE=$(haproxy_show_state raw)
 FOUND=$(echo "$STATE" | grep "^${BACKEND}|${SERVER}|" | wc -l)
 
 if [ "$FOUND" == "1" ]; then
