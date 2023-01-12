@@ -1,6 +1,7 @@
 #ARG HAPROXY_ORIG_VERSION=2.7.1-alpine3.17
 
 #FROM haproxy:$HAPROXY_ORIG_VERSION
+#https://hub.docker.com/_/alpine
 FROM alpine:3.17
 
 ENV HAPROXY_BRANCH 2.8
@@ -42,8 +43,8 @@ RUN apk add --no-cache --virtual build-deps ca-certificates gcc libc-dev \
 COPY haproxy.cfg /usr/local/etc/haproxy/haproxy.cfg
 COPY docker-entrypoint.sh /
 
-COPY scripts/ /usr/local/sbin
-RUN for i in /usr/local/sbin/*.sh; do mv -i "$i" "${i%.sh}"; done
+COPY scripts/ /usr/local/bin
+RUN for i in /usr/local/bin/*.sh; do mv -i "$i" "${i%.sh}"; done
 
 STOPSIGNAL SIGUSR1
 
