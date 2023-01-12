@@ -39,9 +39,11 @@ RUN apk add --no-cache --virtual build-deps ca-certificates gcc libc-dev \
     apk add --no-cache openssl zlib lua5.3-libs pcre2 jq socat util-linux bash && \
     rm -f /var/cache/apk/*
 
-COPY scripts/ /opt/scripts
 COPY haproxy.cfg /usr/local/etc/haproxy/haproxy.cfg
 COPY docker-entrypoint.sh /
+
+COPY scripts/ /usr/local/sbin
+RUN for i in /usr/local/sbin/*.sh; do mv -i "$i" "${i%.sh}"; done
 
 STOPSIGNAL SIGUSR1
 
