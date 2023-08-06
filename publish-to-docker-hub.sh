@@ -3,6 +3,7 @@ CUR_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 IMAGE_NAME="mottor1/haproxy"
 
 #docker login ## Enter login and pass
+export DOCKER_DEFAULT_PLATFORM=linux/amd64
 
 while read -r line || [ -n "$line" ];
 do
